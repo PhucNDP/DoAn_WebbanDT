@@ -1,0 +1,35 @@
+﻿@model Product
+<form asp-action="create" method="post" enctype="multipart/form-data">
+    <h2>Add Product</h2>
+    <hr />
+    <div class="form-group">
+        <label>name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>DisplayOrder</label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Price</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Category</label>
+        <select asp-for="CategoryId" asp-items="@ViewBag.LstCategory">
+            <option disabled selected>==choose category==</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Image</label>
+        <input type="file" id="image" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+    @section Scripts{
+        <partial name="_ValidationScriptsPartial" />
+    }
+</form>

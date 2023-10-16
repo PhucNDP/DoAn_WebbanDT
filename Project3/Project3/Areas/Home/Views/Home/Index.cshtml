@@ -1,0 +1,47 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row mt-2">
+    @foreach (var x in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-2 product-item">
+                <div class="card-header">@x.Name</div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a asp-action="Detail" asp-route-id="@x.Id"> <img src="/@x.ImageUrl" /></a>
+                    </h4>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-6">
+                                Price <span class="price">@x.Price </span> USD
+                            </div>
+                            <div class="col-6 text-end">
+                                <a asp-action="Detail" asp-route-id="@x.Id" class="btn btn-success"><i class="bi bi-search"></i> Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+    <div>
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(ViewBag.pageIndex==1?"disabled":"")">
+                <a class="page-link" asp-action="Index" asp-route-page="1">&laquo;</a>
+            </li>
+            @for (int i = 1; i <= ViewBag.pagesum; i++)
+            {
+                <li class="page-item @(ViewBag.pageIndex==i?"active":"")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                </li>
+            }
+            <li class="page-item @(ViewBag.pageIndex==ViewBag.pagesum?"disabled":"")">
+                <a class="page-link" asp-action="Index" asp-route-page="@ViewBag.pagesum">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+</div>
